@@ -1,0 +1,13 @@
+Configuration:
+  status: warn
+  appenders:
+    Console:
+      name: LogToConsole
+      PatternLayout:
+        Pattern: "%style{%d{HH:mm:ss.SSS}}{Bright}\t%highlight{%msg%n}{WARN=Bright blue , INFO=Bright green, DEBUG=magenta}"
+        disableAnsi: false
+  Loggers:
+    Root:
+      level: debug
+      AppenderRef:
+        ref: LogToConsole

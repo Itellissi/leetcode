@@ -1,5 +1,7 @@
 package com.ite.leetcode;
 
+import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 
 /**
@@ -7,27 +9,11 @@ import java.util.Arrays;
  */
 public final class LeetCodeHelper {
 
-    static int[][] toMatrix(String s) {
-        String[] rows = s.split("\n");
-        int[][] matrix = new int[rows.length][];
-        int i = 0;
-        int j = 0;
-        for (String row : rows) {
-            matrix[i] = new int[row.length()];
-            j = 0;
-            for (char c : row.toCharArray()) {
-                matrix[i][j] = Character.getNumericValue(c);
-                j++;
-            }
-            i++;
-        }
-        return matrix;
-    }
-
-    static String[] asStringArray(String str) {
-        String arr = str.substring(1, str.length() - 1);
-        String[] result = Arrays.stream(arr.split(",")).map(s -> s.substring(1, s.length() - 1)).toArray(String[]::new);
-        return result;
+    static Method getMethod(Class<?> type, String methodName) {
+        return Arrays.stream(type.getDeclaredMethods())
+              .filter(m -> m.getName().equals(methodName))
+              .findFirst()
+              .orElseThrow(RuntimeException::new);
     }
 
     static Class resolveClassName(String date) throws ClassNotFoundException {
@@ -35,5 +21,13 @@ public final class LeetCodeHelper {
         final String month = date.substring(2, 4);
         final String year = date.substring(4);
         return Class.forName("com.ite.leetcode.y" + year + ".m" + month + ".Solution" + day);
+    }
+
+    static InputStream resolveInputFile(String date) {
+        final String day = date.substring(0, 2);
+        final String month = date.substring(2, 4);
+        final String year = date.substring(4);
+        final String path = year + "/" + month + "/" + day + ".input";
+        return LeetCodeHelper.class.getClassLoader().getResourceAsStream(path);
     }
 }
