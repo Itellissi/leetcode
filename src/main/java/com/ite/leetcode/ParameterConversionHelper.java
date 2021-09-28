@@ -11,6 +11,10 @@ public final class ParameterConversionHelper {
         return input;
     }
 
+    static int asInt(String input) {
+        return Integer.valueOf(input);
+    }
+
     static int[][] asIntMatrix(String str) {
         final String rows = str.substring(2, str.length() - 2);
         return Arrays

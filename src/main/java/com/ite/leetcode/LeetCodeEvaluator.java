@@ -23,6 +23,7 @@ public class LeetCodeEvaluator {
     private static final Logger logger = LogManager.getLogger(LeetCodeEvaluator.class);
 
     public static void main(String[] args) throws Exception {
+        runTestsForDate("24092021");
         runTestsForDate("26092021");
         runTestsForDate("27092021");
         runTestsForDate("28092021");
