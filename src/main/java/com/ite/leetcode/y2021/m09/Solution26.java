@@ -1,9 +1,11 @@
 package com.ite.leetcode.y2021.m09;
 
+import com.ite.leetcode.Solution;
+
 /**
  * @author Issam Tellissi
  */
-public class Solution26 {
+public class Solution26 implements Solution<Integer> {
 
     public int movesToChessboard(int[][] board) {
         int countMatch = 1;

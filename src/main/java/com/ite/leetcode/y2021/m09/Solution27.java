@@ -3,10 +3,12 @@ package com.ite.leetcode.y2021.m09;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.ite.leetcode.Solution;
+
 /**
  * @author Issam Tellissi
  */
-public class Solution27 {
+public class Solution27 implements Solution<Integer> {
 
     public int numUniqueEmails(String[] emails) {
         Set<String> mails = new HashSet<>();

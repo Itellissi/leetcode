@@ -25,15 +25,16 @@ public class LeetCodeEvaluator {
     public static void main(String[] args) throws Exception {
         runTestsForDate("26092021");
         runTestsForDate("27092021");
+        runTestsForDate("28092021");
     }
 
     private static void runTestsForDate(String date) throws ClassNotFoundException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         logger.warn("Running tests for date {}", date);
         final InputStream inputStream = resolveInputFile(date);
-        final Class<?> solutionClass = resolveClassName(date);
+        final Class<Solution> solutionClass = resolveClassName(date);
 
         try (final BufferedReader inputReader = new BufferedReader(new InputStreamReader(inputStream))) {
-            final Object instance = solutionClass.getConstructor(null).newInstance();
+            final Solution instance = solutionClass.getConstructor(null).newInstance();
             final String methodName = inputReader.readLine().trim();
             final Method solutionMethod = getMethod(solutionClass, methodName);
 
@@ -44,7 +45,7 @@ public class LeetCodeEvaluator {
         }
     }
 
-    private static void runScenarios(BufferedReader inputReader, Object instance, Method solutionMethod, List<Method> methods) throws IOException, IllegalAccessException, InvocationTargetException {
+    private static void runScenarios(BufferedReader inputReader, Solution instance, Method solutionMethod, List<Method> methods) throws IOException, IllegalAccessException, InvocationTargetException {
         final int parametersCount = methods.size();
         String line;
         int counter = 0;
@@ -60,7 +61,8 @@ public class LeetCodeEvaluator {
             counter++;
             counter %= parametersCount;
             if (counter == 0) {
-                logger.info("\tResult : {}", solutionMethod.invoke(instance, params));
+                Object actualResult = solutionMethod.invoke(instance, params);
+                logger.info("\tResult : {}", instance.resultAsString(actualResult));
             }
         }
     }

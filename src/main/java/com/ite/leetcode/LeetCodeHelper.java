@@ -16,11 +16,11 @@ public final class LeetCodeHelper {
               .orElseThrow(RuntimeException::new);
     }
 
-    static Class resolveClassName(String date) throws ClassNotFoundException {
+    static Class<Solution> resolveClassName(String date) throws ClassNotFoundException {
         final String day = date.substring(0, 2);
         final String month = date.substring(2, 4);
         final String year = date.substring(4);
-        return Class.forName("com.ite.leetcode.y" + year + ".m" + month + ".Solution" + day);
+        return (Class<Solution>) Class.forName("com.ite.leetcode.y" + year + ".m" + month + ".Solution" + day);
     }
 
     static InputStream resolveInputFile(String date) {
