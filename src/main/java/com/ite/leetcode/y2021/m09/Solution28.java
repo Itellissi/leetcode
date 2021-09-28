@@ -10,20 +10,20 @@ import com.ite.leetcode.Solution;
 public class Solution28 implements Solution<int[]> {
 
     public int[] sortArrayByParityII(int[] nums) {
-        int evenIdx = 0;
-        int oddIdx = 1;
-        int[] result = new int[nums.length];
-        for (int i = 0; i < nums.length; i++) {
-            int current = nums[i];
-            if (current % 2 == 0) {
-                result[evenIdx] = current;
-                evenIdx += 2;
-            } else {
-                result[oddIdx] = current;
-                oddIdx += 2;
+        int odd = 1;
+        int temp;
+        for (int even = 0; even < nums.length; even += 2) {
+            if (nums[even] % 2 != 0) {
+                // check odd that are not in place
+                while (nums[odd] % 2 == 1) {
+                    odd += 2;
+                }
+                temp = nums[even];
+                nums[even] = nums[odd];
+                nums[odd] = temp;
             }
         }
-        return result;
+        return nums;
     }
 
     @Override
