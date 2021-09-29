@@ -5,6 +5,10 @@ package com.ite.leetcode;
  */
 public interface Solution<T> {
 
+    default Object convertParam(Object value, int index) {
+        return value;
+    }
+
     /**
      * Converts actual result to a printable String value
      *

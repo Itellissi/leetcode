@@ -23,10 +23,7 @@ public class LeetCodeEvaluator {
     private static final Logger logger = LogManager.getLogger(LeetCodeEvaluator.class);
 
     public static void main(String[] args) throws Exception {
-        runTestsForDate("24092021");
-        runTestsForDate("26092021");
-        runTestsForDate("27092021");
-        runTestsForDate("28092021");
+        runTestsForDate("29092021");
     }
 
     private static void runTestsForDate(String date) throws ClassNotFoundException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
@@ -58,12 +55,14 @@ public class LeetCodeEvaluator {
                 params = new Object[parametersCount];
             }
             logger.debug("\t\t{}", line);
-            params[counter] = methods.get(counter).invoke(null, line);
+            params[counter] = instance.convertParam(methods.get(counter).invoke(null, line), counter);
             counter++;
             counter %= parametersCount;
             if (counter == 0) {
+                long start = System.currentTimeMillis();
                 Object actualResult = solutionMethod.invoke(instance, params);
-                logger.info("\tResult : {}", instance.resultAsString(actualResult));
+                long duration = System.currentTimeMillis() - start;
+                logger.info("\tResult : {}. Calculated in {}ms.", instance.resultAsString(actualResult), duration);
             }
         }
     }
