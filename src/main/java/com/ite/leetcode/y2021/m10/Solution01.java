@@ -8,25 +8,21 @@ import com.ite.leetcode.Solution;
 public class Solution01 implements Solution<Integer> {
 
     public int longestCommonSubsequence(String text1, String text2) {
-        return dp(text1.toCharArray(), text2.toCharArray(), new Integer[text1.length()][text2.length()], text1.length() - 1, text2.length() - 1);
-    }
-
-    private int dp(char[] text1, char[] text2, Integer[][] cache, int i, int j) {
-        if (cache[i][j] != null) {
-            return cache[i][j];
+        char[] text1Chars = text1.toCharArray();
+        char[] text2Chars = text2.toCharArray();
+        int[][] dp = new int[text1.length()][text2.length()];
+        for (int i = 0; i < text1Chars.length; i++) {
+            for (int j = 0; j < text2Chars.length; j++) {
+                if (text1Chars[i] == text2Chars[j]) {
+                    dp[i][j] = 1 + (i > 0 && j > 0 ? dp[i - 1][j - 1] : 0);
+                } else {
+                    dp[i][j] = Math.max(
+                          i > 0 ? dp[i - 1][j] : 0,
+                          j > 0 ? dp[i][j - 1] : 0
+                    );
+                }
+            }
         }
-        if (i == 0 && j == 0) {
-            cache[i][j] = text1[0] == text2[0] ? 1 : 0;
-        } else if (i == 0) {
-            cache[i][j] = Math.max(text1[i] == text2[j] ? 1 : 0, dp(text1, text2, cache, i, j - 1));
-        } else if (j == 0) {
-            cache[i][j] = Math.max(text1[i] == text2[j] ? 1 : 0, dp(text1, text2, cache, i - 1, j));
-        } else {
-            cache[i][j] = text1[i] == text2[j] ?
-                  dp(text1, text2, cache, i - 1, j - 1) + 1 :
-                  Math.max(dp(text1, text2, cache, i - 1, j), dp(text1, text2, cache, i, j - 1));
-        }
-
-        return cache[i][j];
+        return dp[text1.length() - 1][text2.length() - 1];
     }
 }
