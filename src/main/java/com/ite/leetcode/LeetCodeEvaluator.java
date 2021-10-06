@@ -23,7 +23,9 @@ public class LeetCodeEvaluator {
     private static final Logger logger = LogManager.getLogger(LeetCodeEvaluator.class);
 
     public static void main(String[] args) throws Exception {
-        runTestsForDate("05102021");
+        for (String date : args) {
+            runTestsForDate(date);
+        }
     }
 
     private static void runTestsForDate(String date) throws ClassNotFoundException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
