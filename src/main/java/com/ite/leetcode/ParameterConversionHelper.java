@@ -23,6 +23,14 @@ public final class ParameterConversionHelper {
               .toArray(int[][]::new);
     }
 
+    static char[][] asCharMatrix(String str) {
+        final String rows = str.substring(3, str.length() - 3);
+        return Arrays
+              .stream(rows.split("\"\\],\\[\""))
+              .map(ParameterConversionHelper::toCharArray)
+              .toArray(char[][]::new);
+    }
+
     static int[] asIntArray(String str) {
         String arr = str.substring(1, str.length() - 1);
         return toIntArray(arr);
@@ -31,6 +39,15 @@ public final class ParameterConversionHelper {
     static String[] asStringArray(String str) {
         String arr = str.substring(1, str.length() - 1);
         return toStringArray(arr);
+    }
+
+    private static char[] toCharArray(String arr) {
+        final String[] charsAsStr = arr.split("\",\"");
+        final char[] result = new char[charsAsStr.length];
+        for (int i = 0; i < charsAsStr.length; i++) {
+            result[i] = charsAsStr[i].charAt(0);
+        }
+        return result;
     }
 
     private static int[] toIntArray(String arr) {
