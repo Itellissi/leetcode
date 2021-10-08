@@ -41,6 +41,14 @@ public final class ParameterConversionHelper {
         return toStringArray(arr);
     }
 
+    static String[][] asStringMatrix(String str) {
+        final String rows = str.substring(2, str.length() - 2);
+        return Arrays
+              .stream(rows.split("\\],\\["))
+              .map(ParameterConversionHelper::toStringArray)
+              .toArray(String[][]::new);
+    }
+
     private static char[] toCharArray(String arr) {
         final String[] charsAsStr = arr.split("\",\"");
         final char[] result = new char[charsAsStr.length];
@@ -55,6 +63,8 @@ public final class ParameterConversionHelper {
     }
 
     private static String[] toStringArray(String arr) {
-        return Arrays.stream(arr.split(",")).map(s -> s.substring(1, s.length() - 1)).toArray(String[]::new);
+        return arr.trim().isEmpty() ?
+              new String[0] :
+              Arrays.stream(arr.split(",")).map(s -> s.substring(1, s.length() - 1)).toArray(String[]::new);
     }
 }

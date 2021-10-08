@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,9 +39,12 @@ public class LeetCodeEvaluator {
             final String methodName = inputReader.readLine().trim();
             final Method solutionMethod = getMethod(solutionClass, methodName);
 
-            final List<Method> methods = Arrays.stream(inputReader.readLine().split(" "))
-                  .map(name -> getMethod(ParameterConversionHelper.class, name))
-                  .collect(Collectors.toList());
+            String methodsString = inputReader.readLine();
+            final List<Method> methods = methodsString != null && !methodsString.isEmpty() ?
+                  Arrays.stream(methodsString.split(" "))
+                        .map(name -> getMethod(ParameterConversionHelper.class, name))
+                        .collect(Collectors.toList()) :
+                  Collections.emptyList();
             runScenarios(inputReader, instance, solutionMethod, methods);
         }
     }
