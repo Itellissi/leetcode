@@ -65,10 +65,10 @@ public class LeetCodeEvaluator {
             counter++;
             counter %= parametersCount;
             if (counter == 0) {
-                long start = System.currentTimeMillis();
+                long start = System.nanoTime();
                 Object actualResult = solutionMethod.invoke(instance, params);
-                long duration = System.currentTimeMillis() - start;
-                logger.info("\tResult : {}. Calculated in {}ms.", instance.resultAsString(actualResult), duration);
+                long duration = System.nanoTime() - start;
+                logger.info("\tResult : {}. Calculated in {}ms.", instance.resultAsString(actualResult), ((double) duration) / 1_000_000);
             }
         }
     }
