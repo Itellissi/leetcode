@@ -4,10 +4,10 @@ Configuration:
     Console:
       name: LogToConsole
       PatternLayout:
-        Pattern: "%style{%d{HH:mm:ss.SSS}}{Bright}\t%highlight{%msg%n}{WARN=Bright blue , INFO=Bright green, DEBUG=magenta}"
+        Pattern: "%style{%d{HH:mm:ss.SSS}}{Bright}\t%highlight{%msg%n}{WARN=Bright blue , INFO=Bright green, DEBUG=magenta, TRACE=Bright yellow}"
         disableAnsi: false
   Loggers:
     Root:
-      level: debug
+      level: all
       AppenderRef:
         ref: LogToConsole
