@@ -1,6 +1,9 @@
 package com.ite.leetcode;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+
+import com.ite.leetcode.model.TreeNode;
 
 /**
  * @author Issam Tellissi
@@ -47,6 +50,33 @@ public final class ParameterConversionHelper {
               .stream(rows.split("\\],\\["))
               .map(ParameterConversionHelper::toStringArray)
               .toArray(String[][]::new);
+    }
+
+    static TreeNode asTreeNode(String str) {
+        TreeNode[] nodes = Arrays.stream(str.substring(1, str.length() - 1).split(","))
+              .map(String::trim)
+              .map(String::toLowerCase)
+              .map(s -> !s.equals("null") ? new TreeNode(Integer.parseInt(s)) : null)
+              .toArray(TreeNode[]::new);
+        final LinkedList<TreeNode> parents = new LinkedList<>();
+        int currentChildCount = 0;
+        TreeNode curr = nodes[0];
+        for (int i = 1; i < nodes.length; i++) {
+            if (nodes[i] != null) {
+                parents.push(nodes[i]);
+            }
+            switch (currentChildCount % 2) {
+                case 0:
+                    curr.left = nodes[i];
+                    break;
+                case 1:
+                    curr.right = nodes[i];
+                    curr = parents.removeLast();
+                    break;
+            }
+            currentChildCount++;
+        }
+        return nodes[0];
     }
 
     private static char[] toCharArray(String arr) {
