@@ -1,0 +1,4 @@
+bstFromPreorder
+asIntArray
+[8,5,1,7,10,12]
+[8,5,1,7,10,12,24]
