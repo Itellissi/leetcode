@@ -8,8 +8,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,8 +26,15 @@ public class LeetCodeEvaluator {
     private static final Logger logger = LogManager.getLogger(LeetCodeEvaluator.class);
 
     public static void main(String[] args) throws Exception {
-        for (String date : args) {
-            runTestsForDate(date);
+        if (args.length == 0) {
+            // run for current date
+            String currentDate = new SimpleDateFormat("ddMMyyyy").format(new Date());
+            logger.trace("Running dynamically for current date {}", currentDate);
+            runTestsForDate(currentDate);
+        } else {
+            for (String date : args) {
+                runTestsForDate(date);
+            }
         }
     }
 
