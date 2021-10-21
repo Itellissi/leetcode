@@ -21,7 +21,8 @@ public final class ParameterConversionHelper {
     static int[][] asIntMatrix(String str) {
         final String rows = str.substring(2, str.length() - 2);
         return Arrays
-              .stream(rows.split("\\],\\["))
+              .stream((rows + " ").split("\\],\\["))
+              .map(String::trim)
               .map(ParameterConversionHelper::toIntArray)
               .toArray(int[][]::new);
     }
@@ -89,7 +90,9 @@ public final class ParameterConversionHelper {
     }
 
     private static int[] toIntArray(String arr) {
-        return Arrays.stream(arr.split(",")).mapToInt(Integer::valueOf).toArray();
+        return arr.trim().isEmpty() ?
+              new int[0] :
+              Arrays.stream(arr.split(",")).mapToInt(Integer::valueOf).toArray();
     }
 
     private static String[] toStringArray(String arr) {
