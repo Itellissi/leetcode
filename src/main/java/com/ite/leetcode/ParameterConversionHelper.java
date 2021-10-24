@@ -57,7 +57,7 @@ public final class ParameterConversionHelper {
         TreeNode[] nodes = Arrays.stream(str.substring(1, str.length() - 1).split(","))
               .map(String::trim)
               .map(String::toLowerCase)
-              .map(s -> !s.equals("null") ? new TreeNode(Integer.parseInt(s)) : null)
+              .map(s -> !s.equals("null") && !s.isEmpty() ? new TreeNode(Integer.parseInt(s)) : null)
               .toArray(TreeNode[]::new);
         final LinkedList<TreeNode> parents = new LinkedList<>();
         int currentChildCount = 0;
