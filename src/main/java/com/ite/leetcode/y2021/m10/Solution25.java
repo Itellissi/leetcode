@@ -1,7 +1,5 @@
 package com.ite.leetcode.y2021.m10;
 
-import java.util.LinkedList;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -44,29 +42,28 @@ public class Solution25 implements Solution<Object> {
 
 class MinStack {
 
-    private final LinkedList<int[]> items;
+    private Object[] last;
 
     public MinStack() {
-        this.items = new LinkedList<>();
     }
 
     public void push(int val) {
-        if (items.isEmpty()) {
-            items.push(new int[]{val, val});
+        if (last == null) {
+            last = new Object[]{val, val, null};
         } else {
-            items.push(new int[]{val, Math.min(val, items.peek()[1])});
+            last = new Object[]{val, Math.min(val, (int) last[1]), last};
         }
     }
 
     public void pop() {
-        items.pop();
+        last = last != null ? (Object[]) last[2] : null;
     }
 
     public int top() {
-        return items.peek()[0];
+        return (int) last[0];
     }
 
     public int getMin() {
-        return items.peek()[1];
+        return (int) last[1];
     }
 }
