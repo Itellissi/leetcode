@@ -1,0 +1,4 @@
+invertTree
+asTreeNode
+[1,2,3,4,5,null,null,6,7,8,9,10,null,11,14,15,null,16,18,null]
+[2,1,3]
