@@ -2,7 +2,10 @@ package com.ite.leetcode;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import com.ite.leetcode.model.ListNode;
 import com.ite.leetcode.model.TreeNode;
 
 /**
@@ -78,6 +81,20 @@ public final class ParameterConversionHelper {
             currentChildCount++;
         }
         return nodes[0];
+    }
+
+    static ListNode asListNode(String str) {
+        List<Integer> list = Arrays.stream(str.substring(1, str.length() - 1).split(","))
+              .map(String::trim)
+              .map(Integer::parseInt)
+              .collect(Collectors.toList());
+        final ListNode result = list.isEmpty() ? null : new ListNode(list.get(0));
+        ListNode curr = result;
+        for (int i = 1; i < list.size(); i++) {
+            curr.next = new ListNode(list.get(i));
+            curr = curr.next;
+        }
+        return result;
     }
 
     private static char[] toCharArray(String arr) {
