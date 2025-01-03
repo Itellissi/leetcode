@@ -1,7 +1,5 @@
 package com.ite.leetcode.y2021.m10;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import com.ite.leetcode.Solution;
 
@@ -10,7 +8,6 @@ import com.ite.leetcode.Solution;
  */
 public class Solution25 implements Solution<Object> {
 
-    private static final Logger logger = LogManager.getLogger(Solution25.class);
 
     public void test(String[] methods, int[][] args) {
         MinStack instance = new MinStack();
@@ -22,18 +19,18 @@ public class Solution25 implements Solution<Object> {
                     instance = new MinStack();
                     break;
                 case "push":
-                    logger.info("push " + argument);
+                    System.out.println("push " + argument);
                     instance.push(argument);
                     break;
                 case "pop":
-                    logger.info("pop ");
+                    System.out.println("pop ");
                     instance.pop();
                     break;
                 case "top":
-                    logger.info("top : " + instance.top());
+                    System.out.println("top : " + instance.top());
                     break;
                 case "getMin":
-                    logger.info("getMin : " + instance.getMin());
+                    System.out.println("getMin : " + instance.getMin());
                     break;
             }
         }

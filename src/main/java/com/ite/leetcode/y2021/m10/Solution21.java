@@ -1,22 +1,13 @@
 package com.ite.leetcode.y2021.m10;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.ite.leetcode.Solution;
+
+import java.util.*;
 
 /**
  * @author Issam Tellissi
  */
-public class Solution21 implements Solution {
-
-    private static final Logger logger = LogManager.getLogger(Solution21.class);
+public class Solution21 implements Solution<Object> {
 
     public void test(String[] methods, int[][] args) {
         RandomizedSet instance = new RandomizedSet();
@@ -28,13 +19,13 @@ public class Solution21 implements Solution {
                     instance = new RandomizedSet();
                     break;
                 case "insert":
-                    logger.info("insert " + argument + " : " + instance.insert(argument));
+                    System.out.println("insert " + argument + " : " + instance.insert(argument));
                     break;
                 case "remove":
-                    logger.info("remove " + argument + " : " + instance.remove(argument));
+                    System.out.println("remove " + argument + " : " + instance.remove(argument));
                     break;
                 case "getRandom":
-                    logger.info("getRandom : " + instance.getRandom());
+                    System.out.println("getRandom : " + instance.getRandom());
                     break;
             }
         }

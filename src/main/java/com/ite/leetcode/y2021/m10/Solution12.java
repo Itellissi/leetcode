@@ -1,18 +1,14 @@
 package com.ite.leetcode.y2021.m10;
 
-import java.util.Random;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.ite.leetcode.Solution;
+
+import java.util.Random;
 
 /**
  * @author Issam Tellissi
  */
 public class Solution12 implements Solution<Integer> {
 
-    private static final Logger logger = LogManager.getLogger(Solution12.class);
     /**
      * Guess game simple implementation
      */
@@ -31,7 +27,7 @@ public class Solution12 implements Solution<Integer> {
 
     public int play(int n, int pick) {
         this.pick = pick < 0 ? new Random().nextInt(n) : pick;
-        logger.trace("\tPicked {}{}", (pick < 0) ? "randomly " : "", this.pick);
+        System.out.printf("\tPicked %s%s%n", (pick < 0) ? "randomly " : "", this.pick);
         return guessNumber(n);
     }
 

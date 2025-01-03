@@ -1,16 +1,11 @@
 package com.ite.leetcode.y2021.m10;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.ite.leetcode.Solution;
 
 /**
  * @author Issam Tellissi
  */
-public class Solution08 implements Solution {
-
-    private static final Logger logger = LogManager.getLogger(Solution08.class);
+public class Solution08 implements Solution<Object> {
 
     public void test(String[] methods, String[][] args) {
         Trie instance = null;
@@ -22,14 +17,14 @@ public class Solution08 implements Solution {
                     instance = new Trie();
                     break;
                 case "insert":
-                    logger.info("insert " + argument);
+                    System.out.println("insert " + argument);
                     instance.insert(argument);
                     break;
                 case "search":
-                    logger.info("search " + argument + ": " + instance.search(argument));
+                    System.out.println("search " + argument + ": " + instance.search(argument));
                     break;
                 case "startsWith":
-                    logger.info("startsWith " + argument + ": " + instance.startsWith(argument));
+                    System.out.println("startsWith " + argument + ": " + instance.startsWith(argument));
                     break;
             }
         }
